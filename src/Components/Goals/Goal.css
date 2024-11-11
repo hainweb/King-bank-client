@@ -1,0 +1,59 @@
+.financial-goals-card {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .goal-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .goal-icon {
+    font-size: 30px;
+    margin-right: 20px;
+  }
+  
+  .goal-details {
+    flex: 1;
+  }
+  
+  .goal-progress {
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    height: 8px;
+    margin: 10px 0;
+    position: relative;
+  }
+  
+  .progress-bar {
+    background-color: #3b82f6; /* Blue for progress */
+    height: 100%;
+    border-radius: 10px;
+  }
+  
+  .goal-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  

@@ -1,0 +1,95 @@
+$blue: #00c8e5;
+$white: #fff;
+$darkBlue: #007a99;
+$curve: cubic-bezier(0.420, 0.000, 0.275, 1.155);
+$time: 1.4s;
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+}
+
+.checkmark {
+  position: relative;
+  padding: 30px;
+  animation: checkmark 3s ease-in-out both;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confetti {
+  position: absolute;
+  animation: grow $time ease-in-out infinite;
+  opacity: 0;
+  transform-origin: center;
+}
+
+.checkmark__check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%) scale(0);
+  fill: $white;
+  animation: checkAppear 1s ease forwards 1.2s;
+}
+
+.checkmark__back {
+  animation: rotate 12s linear infinite;
+  fill: $darkBlue;
+  opacity: 0.2;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes grow {
+  0%, 100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  20%, 80% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+@keyframes checkAppear {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}

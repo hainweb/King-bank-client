@@ -1,0 +1,137 @@
+/* Global Settings */
+.settings-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(45deg, #f1f1f1, #ffffff);
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+  }
+  
+  .settings-content {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 400px;
+    text-align: center;
+  }
+  
+  .settings-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2e3a59;
+    margin-bottom: 20px;
+  }
+  
+  .profile-box,
+  .action-box {
+    background: #f5f6fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .profile-header {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .profile-status {
+    font-size: 1.1rem;
+    color: #4caf50;
+    font-weight: bold;
+  }
+  
+  .premium-status {
+    color: #4caf50;
+  }
+  
+  .normal-status {
+    color: #f44336;
+  }
+  
+  .btn {
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  
+  .btn-premium {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .btn-premium:hover {
+    background-color: #45a049;
+  }
+  
+  .btn-normal {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .btn-normal:hover {
+    background-color: #d32f2f;
+  }
+  
+  .pin-entry-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pin-input {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    width: 80%;
+  }
+  
+  .error-message {
+    color: #f44336;
+    font-size: 0.9rem;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  
+  .btn-cancel,
+  .btn-confirm {
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-cancel {
+    background-color: #ccc;
+    color: white;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #b5b5b5;
+  }
+  
+  .btn-confirm {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .btn-confirm:hover {
+    background-color: #45a049;
+  }
+  
