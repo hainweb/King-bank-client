@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Components/Header/Header';
 import View from './Components/View/View';
 import Signup from './Components/Auth/Signup';
-import Login from './Components/Auth/Login';
+
 import Send from './Components/Send/Send';
 import Transation from './Components/View/Transation';
 import Settings from './Components/Settings/Settings';
@@ -40,15 +40,15 @@ function App() {
       <Router>
         <Header user={user} setUser={setUser} />
         <Routes>
-          <Route path="/" element={user ? <View user={user} setUser={setUser} /> : <Login setUser={setUser} />} />
+          <Route path="/" element={user ? <View user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
           <Route path="/signup" element={<Signup setUser={setUser} />} />
           <Route path="/login" element={<LoginForm setUser={setUser} />} />
-          <Route path='/send' element={<Send user={user} setUser={setUser} />} />
-          <Route path='/mobile' element={<Mobile user={user} setUser={setUser} />} />
-          <Route path='/transation' element={<Transation />} />
-          <Route path='/atm' element={<Atm user={user} setUser={setUser} />} />
-          <Route path='/settings' element={user ? <Settings user={user} setUser={setUser} /> : <Login />} />
-          <Route path='/goals' element={<Goals user={user}/>} />
+          <Route path='/send' element={user? <Send user={user} setUser={setUser} /> : <LoginForm/>} />
+          <Route path='/mobile' element={user? <Mobile user={user} setUser={setUser} /> : <LoginForm/>} />
+          <Route path='/transation' element={user? <Transation /> : <LoginForm/>} />
+          <Route path='/atm' element={user? <Atm user={user} setUser={setUser} /> :<LoginForm/>} />
+          <Route path='/settings' element={user ? <Settings user={user} setUser={setUser} /> : <LoginForm />} />
+          <Route path='/goals' element={user? <Goals user={user}/> :<LoginForm/>} />
         </Routes>
       </Router>
     </div>
