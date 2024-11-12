@@ -12,6 +12,9 @@ const Signup = ({ setUser }) => {
     Mobile: '',
     Password: '',
   });
+
+  const [loading, setLoading] = useState(false)
+
   const [info, setInfo] = useState('');
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -36,6 +39,13 @@ const Signup = ({ setUser }) => {
     // Validate Name (non-empty)
     if (!formData.Name.trim()) {
       setInfo('Name is required');
+      setLoading(false)
+      return false;
+    }
+
+    if (!formData.Uid.trim()) {
+      setInfo('Uid is required');
+      setLoading(false)
       return false;
     }
 
@@ -43,12 +53,14 @@ const Signup = ({ setUser }) => {
     const phoneRegex = /^[0-9]{10}$/;
     if (!phoneRegex.test(formData.Mobile)) {
       setInfo('Mobile must be 10 digits');
+      setLoading(false)
       return false;
     }
 
     // Validate Password (must be at least 4 characters)
     if (formData.Password.length < 4) {
       setInfo('Password must be at least 4 characters');
+      setLoading(false)
       return false;
     }
 
@@ -56,6 +68,7 @@ const Signup = ({ setUser }) => {
   };
 
   const handleSubmit = (e) => {
+    setLoading(true)
     e.preventDefault();
 
     if (!validateForm()) {
@@ -63,14 +76,17 @@ const Signup = ({ setUser }) => {
     }
 
     axios.post(`${BASE_URL}/signup`, formData, { withCredentials: true }).then((response) => {
+
       console.log(response);
 
       if (response.data.status) {
         const userData = { Name: formData.Name };
         setUser(userData);
+        setLoading(false)
         navigate('/');
       } else {
         setInfo(response.data.message);
+        setLoading(false)
         navigate('/signup');
       }
     });
@@ -144,17 +160,25 @@ const Signup = ({ setUser }) => {
               />
             </div>
 
-            <p style={{color:'red'}}>{info}</p>
+            <p style={{ color: 'red' }}>{info}</p>
 
             <div className="sign-lst">
-                                <p >Already an account</p>
-                                <Link  to="/login">
-                                <h6 className='sign-log'>Login</h6>
-                                </Link>
-                            </div>
+              <p >Already an account</p>
+              <Link to="/login">
+                <h6 className='sign-log'>Login</h6>
+              </Link>
+            </div>
 
             <button type="submit" className="submit-button">
-              Sign Up
+              {loading ?
+                <div className="loading-animation">
+                  <div className="loading-dot"></div>
+                  <div className="loading-dot"></div>
+                  <div className="loading-dot"></div>
+                </div>
+                :
+                "Sign Up"
+              }
             </button>
           </form>
         </div>

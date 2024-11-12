@@ -7,7 +7,9 @@ import {
   CircleUserRound,
   Headphones,
   ShieldAlert,
-  HandHeart
+  HandHeart,
+  TicketPlus,
+
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -203,9 +205,9 @@ function View({ user, setUser }) {
             <div className="account-number">
               **** **** **** {user.accountNumber?.slice(-4)}
             </div>
-            
+
             <div className="card-badges">
-            {user.Premium ?
+              {user.Premium ?
                 <span className="badge">Premium</span>
                 : ''
               }
@@ -214,21 +216,21 @@ function View({ user, setUser }) {
           </div>
 
           {user.Premium ?
-          <Link to="/atm" className="ripple-premium">
-            <div className="quick-actions-bar-premium">
-              <div className="ripple-premium-container">
-                
+            <Link to="/atm" className="ripple-premium">
+              <div className="quick-actions-bar-premium">
+                <div className="ripple-premium-container">
+
                   <Wallet size={20} />
                   <span className="fade-slide-animation">Premium Wallet</span>
-                
+
+                </div>
+                {/* Stars for glowing animation */}
+                <div className="star"></div>
+                <div className="star"></div>
+                <div className="star"></div>
+                <div className="star"></div>
+                <div className="star"></div>
               </div>
-              {/* Stars for glowing animation */}
-              <div className="star"></div>
-              <div className="star"></div>
-              <div className="star"></div>
-              <div className="star"></div>
-              <div className="star"></div>
-            </div>
             </Link>
             : ''
           }
@@ -254,6 +256,17 @@ function View({ user, setUser }) {
             <Link to='/transation' className="action-button ripple">
               <ArrowLeftRight size={20} />
               <span>Transations</span>
+            </Link>
+            {user.Premium ?
+              <Link to='/addCheck' className="action-button ripple">
+                <TicketPlus size={20} />
+                <span>Add Check</span>
+              </Link>
+              :''
+}
+            <Link to='/reward' className="action-button ripple">
+              <Gift size={20} />
+              <span>Reward</span>
             </Link>
           </div>
         </div>

@@ -92,21 +92,29 @@ function Confirm({ selectedUser, user, setUser }) {
     To: selectedUser._id
   });
   const [showCheckmark, setShowCheckmark] = useState(false); // State to control showing checkmark
+  const [loading, setLoading] = useState(false); // State to control loading animation
 
   const validatePin = async (pin) => {
+    setLoading(true); // Start loading animation
     try {
       const response = await axios.post(`${BASE_URL}/check-pin`, { pin }, { withCredentials: true });
       if (response.data.status) {
-        handleSubmit();
+        setLoading(true)
+
+        handleSubmit(); // Proceed to submit payment
       } else {
         setMessage(response.data.message);
       }
     } catch (error) {
       setMessage('Failed to validate PIN. Please try again.');
+    } finally {
+     
     }
   };
+  
 
   const handleSubmit = async () => {
+    setLoading(true); // Start loading animation
     try {
       const sendAmountResult = await axios.post(`${BASE_URL}/sendAmount`, formData, { withCredentials: true });
       setUser(sendAmountResult.data);
@@ -115,6 +123,9 @@ function Confirm({ selectedUser, user, setUser }) {
       setShowCheckmark(true); // Show the checkmark page after successful payment
     } catch (error) {
       setMessage('Payment failed. Please try again.');
+    } finally {
+      
+      
     }
   };
 
@@ -133,17 +144,19 @@ function Confirm({ selectedUser, user, setUser }) {
   };
 
   if (showCheckmark) {
-    return (
-      
-        <Checkmark message="Payment Successful!" />
-     
-    );
+    return <Checkmark message="Payment Successful!" />;
   }
 
   return (
     <div className="payment-container">
       <div className="payment-card">
-        {isPin ? (
+        {loading ? (
+          <div className="loading-animation">
+            <div className="loading-dot"></div>
+            <div className="loading-dot"></div>
+            <div className="loading-dot"></div>
+          </div>
+        ) : isPin ? (
           <PinInput 
             onComplete={validatePin}
             onCancel={handleCancel}

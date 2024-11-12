@@ -1,174 +1,208 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSpring, animated } from 'react-spring';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import { Star, Sparkles, Crown } from 'lucide-react';
 
 const PremiumWelcome = () => {
-  const navigate = useNavigate();
+  const [mounted, setMounted] = useState(false);
+  const [countdown, setCountdown] = useState(6);
 
-  // Welcome text animation - Ultra design effect
-  const welcomeAnimation = useSpring({
-    opacity: 1,
-    transform: 'scale(1)',
-    from: { opacity: 0, transform: 'scale(0.5)' },
-    config: { tension: 180, friction: 20, duration: 1500 },
-  });
-
-  // Subheading slide and fade-in with staggered delay
-  const subheadingAnimation = useSpring({
-    opacity: 1,
-    transform: 'translateX(0)',
-    from: { opacity: 0, transform: 'translateX(-100%)' },
-    config: { duration: 1200 },
-  });
-
-  // Button animation with bounce and hover effect
-  const buttonAnimation = useSpring({
-    transform: 'scale(1)',
-    from: { transform: 'scale(0.95)' },
-    config: { tension: 250, friction: 18 },
-  });
-
-  // Icon animation with a 3D effect
-  const iconAnimation = useSpring({
-    transform: 'scale(1) rotate(0deg)',
-    from: { transform: 'scale(0) rotate(720deg)' },
-    config: { tension: 200, friction: 25 },
-  });
-
-  // Footer text fade-in after a delay
-  const footerAnimation = useSpring({
-    opacity: 1,
-    from: { opacity: 0 },
-    delay: 1500,
-    config: { duration: 1000 },
-  });
-
-  // Redirect to the home page after 6 seconds
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate('/'); // Redirect to homepage after 6 seconds
+    setMounted(true);
+    
+    // Countdown timer
+    const countdownInterval = setInterval(() => {
+      setCountdown((prev) => prev - 1);
+    }, 1000);
+
+    // Redirect after 6 seconds
+    const redirectTimer = setTimeout(() => {
+      window.location.href = '/';
     }, 6000);
 
-    return () => clearTimeout(timer); // Clean up timeout on component unmount
-  }, [navigate]);
+    return () => {
+      clearInterval(countdownInterval);
+      clearTimeout(redirectTimer);
+    };
+  }, []);
 
   return (
-    <Container>
-      {/* Animated "Welcome" text */}
-      <animated.h1 style={welcomeAnimation}>
-        Welcome to the Premium Experience
-      </animated.h1>
+    <div className={`container ${mounted ? 'mounted' : ''}`}>
+      {/* Countdown display */}
+      <div className="countdown">{countdown}</div>
 
-      {/* Animated Subheading */}
-      <animated.h3 style={subheadingAnimation}>
-        Unlock a world of exclusive features.
-      </animated.h3>
+      {/* Background sparkles */}
+      <div className="sparkle-container">
+        <div className="sparkle sparkle-1">
+          <Sparkles color="#FFD700" size={32} />
+        </div>
+        <div className="sparkle sparkle-2">
+          <Star color="#FFD700" size={24} />
+        </div>
+        <div className="sparkle sparkle-3">
+          <Sparkles color="#FFD700" size={40} />
+        </div>
+      </div>
 
-      {/* Animated "Get Started" Button */}
-    
-      <animated.p style={footerAnimation}>
-        You Are Lucky!!
-      </animated.p>
-      {/* Animated Icon with 3D effect */}
-      <animated.div style={iconAnimation}>
-        <i className="fa fa-gem" style={{ fontSize: '80px', color: '#ff5e62' }}></i>
-      </animated.div>
+      {/* Main content */}
+      <div className="content">
+        <div className="icon-container">
+          <Crown color="#FFD700" size={64} className="crown-icon" />
+        </div>
 
-      {/* Animated Footer Text */}
-      <animated.p style={footerAnimation}>
-        Your premium journey begins now. Enjoy the perks!
-      </animated.p>
-    </Container>
+        <h1 className="title">Welcome to Premium</h1>
+        <h2 className="subtitle">Experience the Extraordinary</h2>
+        
+        <p className="message">Redirecting to homepage in {countdown} seconds...</p>
+      </div>
+
+      <style jsx>{`
+        .container {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+          position: relative;
+          overflow: hidden;
+          padding: 2rem;
+          font-family: system-ui, -apple-system, sans-serif;
+          color: white;
+        }
+
+        .countdown {
+          position: fixed;
+          top: 2rem;
+          right: 2rem;
+          font-size: 2rem;
+          font-weight: bold;
+          color: #FFD700;
+          animation: pulse 1s infinite;
+        }
+
+        .sparkle-container {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+
+        .sparkle {
+          position: absolute;
+          opacity: 0;
+          transform: scale(0);
+          transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .mounted .sparkle {
+          opacity: 0.6;
+          transform: scale(1);
+        }
+
+        .sparkle-1 {
+          top: 15%;
+          left: 15%;
+          animation: float 3s infinite ease-in-out;
+        }
+
+        .sparkle-2 {
+          top: 30%;
+          right: 20%;
+          animation: float 4s infinite ease-in-out;
+        }
+
+        .sparkle-3 {
+          bottom: 25%;
+          left: 25%;
+          animation: float 5s infinite ease-in-out;
+        }
+
+        .content {
+          text-align: center;
+          transform: translateY(30px);
+          opacity: 0;
+          transition: all 1s ease;
+        }
+
+        .mounted .content {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        .icon-container {
+          margin-bottom: 2rem;
+        }
+
+        .crown-icon {
+          animation: glow 2s infinite alternate;
+        }
+
+        .title {
+          font-size: 3.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          background: linear-gradient(to right, #ffffff, #FFD700);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .subtitle {
+          font-size: 1.5rem;
+          font-weight: 400;
+          margin-bottom: 3rem;
+          opacity: 0.9;
+        }
+
+        .message {
+          font-size: 1.2rem;
+          opacity: 0.8;
+          margin-top: 2rem;
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+
+        @keyframes glow {
+          0% {
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.6));
+          }
+          100% {
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+          }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.1);
+            opacity: 0.8;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .title {
+            font-size: 2.5rem;
+          }
+          
+          .subtitle {
+            font-size: 1.2rem;
+          }
+          
+          .countdown {
+            font-size: 1.5rem;
+          }
+        }
+      `}</style>
+    </div>
   );
 };
-
-// Styled Components for Ultra-Design
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
-  overflow: hidden;
-
-  h1 {
-    font-size: 3.8rem;
-    margin-bottom: 30px;
-    letter-spacing: 5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #fff;
-    animation: glow 1.5s infinite alternate;
-  }
-
-  h3 {
-    font-size: 1.8rem;
-    margin-bottom: 50px;
-    font-weight: 400;
-    color: #f1f1f1;
-    opacity: 0;
-  }
-
-  button {
-    background-color: #ff5e62;
-    border: none;
-    color: white;
-    padding: 20px 70px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    border-radius: 50px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease-in-out;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 2px;
-
-    &:hover {
-      background-color: #ff8a00;
-      transform: scale(1.1);
-      box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.3);
-    }
-  }
-
-  i {
-    font-size: 80px;
-    margin-top: 40px;
-    animation: bounce 2s infinite ease-in-out;
-  }
-
-  p {
-    font-size: 1.3rem;
-    margin-top: 50px;
-    font-weight: 300;
-    color: #f1f1f1;
-    letter-spacing: 0.5px;
-  }
-
-  @keyframes glow {
-    0% {
-      text-shadow: 0 0 15px #fff, 0 0 30px #ff5e62, 0 0 45px #ff5e62;
-    }
-    100% {
-      text-shadow: 0 0 25px #fff, 0 0 50px #ff5e62, 0 0 75px #ff5e62;
-    }
-  }
-
-  @keyframes bounce {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-`;
 
 export default PremiumWelcome;

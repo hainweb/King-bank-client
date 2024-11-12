@@ -10,13 +10,16 @@ function Settings({ user, setUser }) {
   const [premiumWelcome, setPremiumWelcome] = useState(false)
   const [pin, setPin] = useState('')
   const [isPin, setIspin] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const [message, setMessage] = useState('')
 
   const handleNormal = () => {
+    setLoading(true)
     axios.post(`${BASE_URL}/change-premium`, { Premium: true }, { withCredentials: true }).then((response) => {
       if (response.data.status) {
         setIsPremium(false)
+        setLoading(false)
         setUser({ ...user, Premium: false })
       }
     })
@@ -27,6 +30,7 @@ function Settings({ user, setUser }) {
   }
 
   const validatePin = () => {
+    setLoading(true)
     axios.post(`${BASE_URL}/check-premium-pin`, { pin }, { withCredentials: true }).then((response) => {
       if (response.data.status) {
         setIspin(false)
@@ -36,11 +40,14 @@ function Settings({ user, setUser }) {
           if (response.data.status) {
             setIsPremium(true)
             setPremiumWelcome(true)
+            setLoading(false)
             setUser({ ...user, Premium: true })
           }
         })
       } else {
+        setLoading(false)
         setMessage(response.data.message)
+        
       }
     })
   }
@@ -77,9 +84,25 @@ function Settings({ user, setUser }) {
 
               <div className="action-box">
                 {isPremium || user.Premium ? (
-                  <button className="btn btn-normal" onClick={handleNormal}>Switch to Normal</button>
+                  loading ?
+                    <div className="loading-animation">
+                      <div className="loading-dot"></div>
+                      <div className="loading-dot"></div>
+                      <div className="loading-dot"></div>
+                    </div>
+                    :
+                    <button className="btn btn-normal" onClick={handleNormal}>Switch to Normal</button>
+
                 ) : (
-                  <button className="btn btn-premium" onClick={handlePin}>Switch to Premium</button>
+                  loading ?
+                    <div className="loading-animation">
+                      <div className="loading-dot"></div>
+                      <div className="loading-dot"></div>
+                      <div className="loading-dot"></div>
+                    </div>
+                    :
+                    <button className="btn btn-premium" onClick={handlePin}>Switch to Premium</button>
+
                 )}
               </div>
             </>
@@ -94,8 +117,19 @@ function Settings({ user, setUser }) {
               />
               {message && <p className="error-message">{message}</p>}
               <div className="action-buttons">
+                {loading ? (
+                  <div className="loading-animation">
+                    <div className="loading-dot"></div>
+                    <div className="loading-dot"></div>
+                    <div className="loading-dot"></div>
+                  </div>
+                )
+                  : 
+                  <>
                 <button className="btn btn-cancel" onClick={handleCancel}>Cancel</button>
                 <button className="btn btn-confirm" onClick={validatePin}>Confirm</button>
+                </>
+                }
               </div>
             </div>
           )}

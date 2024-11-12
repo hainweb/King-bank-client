@@ -1,0 +1,51 @@
+/* CSS Variables */
+:root {
+    --dot-size: 10px;
+    --dot-spacing: 10px;
+    --primary-color: #fff;
+    --secondary-color: rgba(255, 255, 255, 0.5);
+    --pulse-duration: 0.6s;
+  }
+  
+  /* Container for the dots */
+  .loading-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--dot-spacing);
+   
+  }
+  
+  /* Dot styles */
+  .loading-dot {
+    width: var(--dot-size);
+    height: var(--dot-size);
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    animation: bounce var(--pulse-duration) infinite ease-in-out;
+    transform-origin: center bottom;
+  }
+  
+  /* Staggering animation delays for each dot */
+  .loading-dot:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .loading-dot:nth-child(2) {
+    animation-delay: calc(var(--pulse-duration) / 3);
+  }
+  .loading-dot:nth-child(3) {
+    animation-delay: calc(var(--pulse-duration) * 2 / 3);
+  }
+  
+  /* Keyframes for bounce and pulse effect */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-8px) scale(1.2);
+      opacity: 1;
+    }
+  }
+  

@@ -2,6 +2,7 @@
 
 
 
+
 section {
     background: black;
     position: absolute;
@@ -13,7 +14,7 @@ section {
     gap: 2px;
     flex-wrap: wrap;
     overflow: hidden;
-}
+}  
 
 section span {
     position: relative;

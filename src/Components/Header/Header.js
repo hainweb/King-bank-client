@@ -1,46 +1,60 @@
 import axios from 'axios';
 import React from 'react';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../Url/Url';
-import './Header.css'; // Make sure to include the CSS file
+import './Header.css';
 
 function Header({ user, setUser }) {
-    const handleLogout = () => {
-        axios.get(`${BASE_URL}/logout`, { withCredentials: true }).then((response) => {
-            console.log(response.data.status);
+  const handleLogout = () => {
+    axios.get(`${BASE_URL}/logout`, { withCredentials: true }).then((response) => {
+      console.log(response.data.status);
 
-            if (response.data.status) {
-                setUser(null);
-            }
-        });
-    };
+      if (response.data.status) {
+        setUser(null);
+      }
+    });
+  };
 
-    return (
-        <div className='app'>
-            <Navbar expand="lg" className="navbar-main">
-                <Navbar.Brand as={Link} to="/" className="navbar-brand">Bank King</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto navbar-links">
-                        <Nav.Link as={Link} to="/" className="nav-link">Home</Nav.Link>
-
-                        {user ? (
-                            <>
-                                <span className="nav-user-name">{user.Name}</span>
-                                <Nav.Link as={Link} onClick={handleLogout} to="/login" className="nav-link">Logout</Nav.Link>
-                                {user.Premium && <Nav.Link as={Link} to='/atm' className="nav-link premium-link">Premium ATM</Nav.Link>}
-                                <Nav.Link as={Link} to='/settings' className="nav-link">Settings</Nav.Link>
-                            </>
-                        ) : (
-                            <Nav.Link as={Link} to="/signup" className="nav-link signup-link">Signup</Nav.Link>
-                        )}
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
+  return (
+    <header className="header-container">
+      <div className="header-content">
+        <div className="brand-container">
+          <Link to="/" className="brand-link">
+            <h1 className="brand-title">Bank King</h1>
+          </Link>
         </div>
-    );
+        <nav className="navbar">
+          <ul className="navbar-list">
+            <li className="navbar-item">
+              <Link to="/" className="navbar-link">Home</Link>
+            </li>
+            {user ? (
+              <>
+                <li className="navbar-item">
+                  <span className="navbar-user-name">{user.Name}</span>
+                </li>
+                <li className="navbar-item">
+                  <Link to="/login" onClick={handleLogout} className="navbar-link">Logout</Link>
+                </li>
+                {user.Premium && (
+                  <li className="navbar-item">
+                    <Link to="/atm" className="navbar-link premium-link">Premium ATM</Link>
+                  </li>
+                )}
+                <li className="navbar-item">
+                  <Link to="/settings" className="navbar-link">Settings</Link>
+                </li>
+              </>
+            ) : (
+              <li className="navbar-item">
+                <Link to="/signup" className="navbar-link signup-link">Signup</Link>
+              </li>
+            )}
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
 }
 
 export default Header;
