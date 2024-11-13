@@ -19,7 +19,9 @@ function PremiumHeader({ user, setUser }) {
 
     return (
         <div className='app'>
-            <Navbar expand="lg" className="navbar-main">
+         <Navbar expand="lg" className={user && user.Premium ? "navbar-main-premium" : "navbar-main"}>
+
+
                 <Navbar.Brand as={Link} to="/" className="navbar-brand">Bank King</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
