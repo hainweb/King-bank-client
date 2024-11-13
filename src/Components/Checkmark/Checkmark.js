@@ -21,6 +21,7 @@ const Checkmark = () => {
   }, [navigate]);
 
   return (
+    <div className="check-mark-con">
     <div className="checkmark">
       {[...Array(6)].map((_, i) => (
         <svg
@@ -64,6 +65,7 @@ const Checkmark = () => {
           fill="#00C8E5"
         />
       </svg>
+    </div>
     </div>
   );
 };
