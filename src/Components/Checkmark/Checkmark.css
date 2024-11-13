@@ -5,6 +5,13 @@ $curve: cubic-bezier(0.420, 0.000, 0.275, 1.155);
 $time: 1.4s;
 
 
+.check-mark-con{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+}
 
 .checkmark {
   position: relative;
