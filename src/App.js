@@ -41,11 +41,12 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {user.Premium ?
+       {user && user.Premium ? (
           <PremiumHeader user={user} setUser={setUser} />
-          :
-          <Header user={user} setUser={setUser} />
-        }
+            ) : (
+           <Header user={user} setUser={setUser} />
+         )}
+
         <Routes>
           <Route path="/" element={user ? <View user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
           <Route path="/signup" element={<Signup setUser={setUser} />} />
