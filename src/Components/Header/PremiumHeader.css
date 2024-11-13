@@ -20,6 +20,14 @@ body {
     overflow: hidden; /* Ensure the scanning effect doesn't overflow outside */
 }
 
+.navbar-main-premium{
+    background-color: #222; /* Dark background for a sleek, professional feel */
+    position: relative;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    overflow: hidden; /* Ensure the scanning effect doesn't overflow outside */
+}
 /* Scanning effect */
 @keyframes scanning {
     0% {
@@ -33,7 +41,9 @@ body {
     }
 }
 
-.navbar-main:before {
+
+
+.navbar-main-premium:before {
     content: "";
     position: absolute;
     top: 0;
