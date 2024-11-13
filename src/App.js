@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './Components/Header/Header';
+
 import PremiumHeader from './Components/Header/PremiumHeader';
 import View from './Components/View/View';
 import Signup from './Components/Auth/Signup';
@@ -41,12 +41,9 @@ function App() {
   return (
     <div className="App">
       <Router>
-       {user && user.Premium ? (
+       
           <PremiumHeader user={user} setUser={setUser} />
-            ) : (
-           <Header user={user} setUser={setUser} />
-         )}
-
+       
         <Routes>
           <Route path="/" element={user ? <View user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
           <Route path="/signup" element={<Signup setUser={setUser} />} />
@@ -72,7 +69,7 @@ function App() {
           <Route path='/settings' element={user ? <Settings user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
           <Route path='/goals' element={user ? <Goals user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
           <Route path='/reward' element={user ? <Reward user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
-          <Route path='/addCheck' element={user ? (  user.Premium ? ( <AddCheck user={user} setUser={setUser} /> ) : <Settings user={user} setUser={setUser}/>) : <LoginForm setUser={setUser} />} />
+          <Route path='/addCheck' element={user ? (user.Premium ? (<AddCheck user={user} setUser={setUser} />) : <Settings user={user} setUser={setUser} />) : <LoginForm setUser={setUser} />} />
         </Routes>
       </Router>
     </div>
