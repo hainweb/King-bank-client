@@ -7,36 +7,27 @@ import './Reward.css'
 const AlertDialog = ({ open, onClose, variant, title, description }) => {
   return (
     <div
-      className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300 ${
-        open ? 'opacity-100' : 'opacity-0 pointer-events-none'
-      }`}
+      className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
     >
       <div className="bg-white shadow-2xl rounded-lg p-8 max-w-md w-full animate-scale-in">
         <div
-          className={`mb-6 flex items-center ${
-            variant === 'success'
-              ? 'text-green-500'
-              : variant === 'error'
+          className={`mb-6 flex items-center ${variant === 'success'
+            ? 'text-green-500'
+            : variant === 'error'
               ? 'text-red-500'
               : ''
-          }`}
+            }`}
         >
           {variant === 'success' ? (
-            <CheckCircle className="w-8 h-8 mr-3" />
+            <CheckCircle  className="w-8 h-8 mr-3" />
           ) : (
-            <XCircle className="w-8 h-8 mr-3" />
+            <XCircle style={{cursor:'pointer'}} onClick={onClose} className="w-8 h-8 mr-3" />
           )}
           <h4 className="text-lg font-bold">{title}</h4>
         </div>
         <p className="text-gray-700 mb-6 animate-fade-in-delay-100">{description}</p>
-        <div className="flex justify-end animate-fade-in-delay-200">
-          <button
-            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-md transition-colors duration-300"
-            onClick={onClose}
-          >
-            Close
-          </button>
-        </div>
+        
       </div>
       <div
         className="fixed inset-0 bg-gray-800 opacity-50 animate-fade-in"
@@ -52,8 +43,12 @@ const Reward = ({ user, setUser }) => {
   const [success, setSuccess] = useState(false);
   const [giftAmount, setGiftAmount] = useState('');
   const [showAlert, setShowAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = () => {
+    if (!code) return; // Prevent submission if the code is empty
+
+    setLoading(true);
     axios
       .post(`${BASE_URL}/get-check`, { code: Number(code) }, { withCredentials: true })
       .then((response) => {
@@ -63,16 +58,18 @@ const Reward = ({ user, setUser }) => {
           setUser(response.data.userLast);
           setSuccess(true);
           setGiftAmount(response.data.Amount);
-          setShowAlert(true);
         } else {
           setMessage(response.data?.message || 'An unexpected error occurred');
-          setShowAlert(true);
         }
+        setShowAlert(true);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
         setMessage('An error occurred while processing your request.');
         setShowAlert(true);
+      })
+      .finally(() => {
+        setLoading(false); // Always set loading to false after the request
       });
   };
 
@@ -105,14 +102,24 @@ const Reward = ({ user, setUser }) => {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             className="border border-gray-300 rounded-md py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            disabled={loading} // Disable input when loading
           />
         </div>
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-md transition-colors duration-300 animate-fade-in-delay-200"
-          onClick={handleSubmit}
-        >
-          Confirm
-        </button>
+        {loading ? (
+          <div style={{float:'left'}} className="loading-animation ">
+            <div className="loading-dot"></div>
+            <div className="loading-dot"></div>
+            <div className="loading-dot"></div>
+          </div>
+        ) : (
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-md transition-colors duration-300 animate-fade-in-delay-200"
+            onClick={handleSubmit}
+            disabled={loading} // Disable button when loading
+          >
+            Confirm
+          </button>
+        )}
       </div>
     </div>
   );
