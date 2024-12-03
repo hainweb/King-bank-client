@@ -103,6 +103,7 @@ function Confirm({ selectedUser, user, setUser }) {
 
         handleSubmit(); // Proceed to submit payment
       } else {
+        setLoading(false)
         setMessage(response.data.message);
       }
     } catch (error) {
