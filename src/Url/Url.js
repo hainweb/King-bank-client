@@ -1,4 +1,4 @@
 
-const BASE_URL = 'https://king-bank-server.onrender.com/ap'
+const BASE_URL = 'https://king-b'
 
 export {BASE_URL}
