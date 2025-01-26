@@ -9,6 +9,7 @@ import {
   ShieldAlert,
   HandHeart,
   TicketPlus,
+  HandCoins,
 
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -64,6 +65,7 @@ function View({ user, setUser }) {
         { pin },
         { withCredentials: true }
       );
+      
       setUser(response.data);
       setIsPin(false);
     } catch (error) {
@@ -203,7 +205,7 @@ function View({ user, setUser }) {
           </div>
           <div className="account-details">
             <div className="account-number">
-              **** **** **** {user.accountNumber?.slice(-4)}
+              **** ****  {user.Uid?.slice(-4)}
             </div>
 
             <div className="card-badges">
@@ -256,6 +258,10 @@ function View({ user, setUser }) {
             <Link to='/transation' className="action-button ripple">
               <ArrowLeftRight size={20} />
               <span>Transations</span>
+            </Link>
+            <Link to='/recharge' className="action-button ripple">
+              <HandCoins size={20} />
+              <span>Recharge</span>
             </Link>
             {user.Premium ?
               <Link to='/addCheck' className="action-button ripple">
