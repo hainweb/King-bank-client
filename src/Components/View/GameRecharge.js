@@ -3,7 +3,7 @@ import Confirm from "./ConfirmRecharge";
 import "./ChannelRecharge.css";
 
 function GameRecharge({ user, setUser }) {
-  const gameId='67321e9277fb87c6e1610f92'
+  const gameId='6734939a60700d08fcec9773'
   const channels = [
     { id: gameId, name: "The Legend of Zelda: Breath of the Wild", price: 199, image: "https://upload.wikimedia.org/wikipedia/en/thumb/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg/220px-The_Legend_of_Zelda_Breath_of_the_Wild.jpg" },
     { id: gameId, name: "Block Puzzle Guardian", price: 99, image: "https://play-lh.googleusercontent.com/mBpKOJBdmZLHFEfIMT0s27O-jX4MyAXqX-vhugHlTE0FKj188WmFCRElxY-inKX1tMA" },
