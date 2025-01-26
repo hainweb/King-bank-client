@@ -28,7 +28,7 @@ function MovieRecharge({ user, setUser }) {
     if (isConfirm) {
         return (
             <Confirm 
-                selectedUser={{ name: channelName ,id:'67321e9277fb87c6e1610f92' , price: selectedPrice }}
+                selectedUser={{ name: channelName ,id:'679645ee47c0c6db867f05cb' , price: selectedPrice }}
                 user={user}
                 setUser={setUser}
             />
@@ -41,7 +41,7 @@ function MovieRecharge({ user, setUser }) {
             <div className="input-group">
                 <label htmlFor="channel-name">Movie Name:</label>
                 <input
-                className=""
+                className="channel-name-input"
                     type="text"
                     id="channel-name"
                     value={channelName}
@@ -52,6 +52,7 @@ function MovieRecharge({ user, setUser }) {
             <div className="input-group">
                 <label htmlFor="price">Select Price:</label>
                 <select
+                className="channel-name-input"
                     id="price"
                     value={selectedPrice}
                     onChange={(e) => setSelectedPrice(e.target.value)}
