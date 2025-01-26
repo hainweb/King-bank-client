@@ -1,4 +1,4 @@
-import './App.css'; 
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import PremiumHeader from './Components/Header/PremiumHeader';
@@ -14,10 +14,14 @@ import Goals from './Components/Goals/Goals';
 import LoginForm from './Components/Auth/NewLogin';
 import AddCheck from './Components/Reward/AddCheck';
 import Reward from './Components/Reward/Reward';
+import Recharge from './Components/View/Recharge';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BASE_URL } from './Url/Url';
+import ChannelRecharge from './Components/View/ChannelRecharge';
+import GameRecharge from './Components/View/GameRecharge';
+import MovieRecharge from './Components/View/MovieRecharge';
 
 
 
@@ -51,6 +55,10 @@ function App() {
           <Route path='/send' element={user ? <Send user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
           <Route path='/mobile' element={user ? <Mobile user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
           <Route path='/transation' element={user ? <Transation user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
+          <Route path='/recharge' element={user ? <Recharge user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
+          <Route path='/channel-recharge' element={user ? <ChannelRecharge user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
+          <Route path='/game-recharge' element={user ? <GameRecharge user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
+          <Route path='/movie-recharge' element={user ? <MovieRecharge user={user} setUser={setUser} /> : <LoginForm setUser={setUser} />} />
           <Route
             path='/atm'
             element={
