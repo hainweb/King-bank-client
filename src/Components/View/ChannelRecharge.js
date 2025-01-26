@@ -5,7 +5,7 @@ import "./ChannelRecharge.css";
 import { BASE_URL } from "../../Url/Url";
 
 function ChannelRecharge({ user, setUser }) {
-    const channelId='67321e9277fb87c6e1610f92'
+    const channelId='6796468d47c0c6db867f05cc'
     const channels = [
         { id: channelId, name: "Asinet", price: 299, image: "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/7199/597199-h" },
         { id: channelId , name: "Flowers", price: 500, image: "https://play-lh.googleusercontent.com/rcpnu_rUZhWHvged9zd2ZEoEoLQFb6uAOYqxKl4qTNGuxeGPEGwMqvaRISYlMJDBZhA" },
