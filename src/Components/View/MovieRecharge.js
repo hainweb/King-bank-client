@@ -39,6 +39,7 @@ function MovieRecharge({ user, setUser }) {
         <div className="channel-container">
             <h1 className="channel-title">Movie Recharge</h1>
             <div className="input-group">
+        <p>5 Days</p>
                 <label htmlFor="channel-name">Movie Name:</label>
                 <input
                 className="channel-name-input"
